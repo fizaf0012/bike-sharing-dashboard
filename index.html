@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bike Sharing Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>🚴‍♀️ Bike Sharing Interactive Dashboard</h1>
+    <p class="subtitle">Select a chart to explore:</p>
+
+    <div class="chart-selector">
+      <button data-chart="line">📈 Line</button>
+      <button data-chart="bar">📊 Bar</button>
+      <button data-chart="scatter">🔵 Scatter</button>
+      <button data-chart="pie">🥧 Pie</button>
+      <button data-chart="tree">🧱 Tree Map</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- LINE CHART -->
+    <section id="line" class="chart-section chart-view active">
+      <h2>📈 Ride Volume Over Time</h2>
+      <div id="lineChart" class="chart"></div>
+    </section>
+
+    <!-- BAR CHART -->
+    <section id="bar" class="chart-section chart-view hidden">
+      <div class="chart-header">
+        <h2>🚲 Rideable Type Distribution</h2>
+        <label for="userTypeFilter" style="margin-left: 1rem;">
+          Filter:
+          <select id="userTypeFilter">
+            <option value="all">All</option>
+            <option value="member">Member</option>
+            <option value="casual">Casual</option>
+          </select>
+        </label>
+      </div>
+      <div id="barChart" class="chart"></div>
+      <div class="legend">
+        <span class="legend-box" style="background:#4CAF50;"></span> Classic / Electric / Docked
+      </div>
+    </section>
+
+    <!-- SCATTER PLOT -->
+    <section id="scatter" class="chart-section chart-view hidden">
+      <div class="chart-header">
+        <h2>⏱️ Duration vs. Hour of Day</h2>
+        <label for="bikeTypeFilter" style="margin-left: 1rem;">
+          Bike Type:
+          <select id="bikeTypeFilter">
+            <option value="all">All</option>
+            <option value="classic_bike">Classic</option>
+            <option value="electric_bike">Electric</option>
+            <option value="docked_bike">Docked</option>
+          </select>
+        </label>
+      </div>
+      <div class="scatter-container">
+        <div id="scatterPlot"></div>
+        <div id="scatterLegend" class="scatter-legend"></div>
+      </div>
+    </section>
+
+    <!-- PIE CHART -->
+    <section id="pie" class="chart-section chart-view hidden">
+      <h2>🥧 User Type Distribution</h2>
+      <div id="pieChart" class="pie-container"></div>
+      <div class="legend">
+        <span class="legend-box" style="background:#4CAF50;"></span> Member
+        <span class="legend-box" style="background:#2196F3; margin-left: 15px;"></span> Casual
+      </div>
+    </section>
+
+    <!-- TREE MAP -->
+    <section id="tree" class="chart-section chart-view hidden">
+      <h2>🧱 Tree Map – User Type & Rideable Type</h2>
+      <div id="treeMap" class="chart"></div>
+      <div class="legend" style="margin-top: 1rem;">
+        <span class="legend-box" style="background:#00cca7;"></span> Member
+        <span class="legend-box" style="background:#cc004b; margin-left: 20px;"></span> Casual
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Chart Scripts -->
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/treeMap.js"></script>
+  <script type="module" src="js/lineChart.js"></script>
+  <script type="module" src="js/barChart.js"></script>
+  <script type="module" src="js/scatterPlot.js"></script>
+  <script type="module" src="js/pieChart.js"></script>
+
+  <!-- Chart Toggle Script -->
+  <script>
+    const buttons = document.querySelectorAll(".chart-selector button");
+    const charts = document.querySelectorAll(".chart-view");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.chart;
+
+        charts.forEach(chart => {
+          chart.classList.remove("active");
+          chart.classList.add("hidden");
+        });
+
+        document.getElementById(target).classList.add("active");
+        document.getElementById(target).classList.remove("hidden");
+      });
+    });
+  </script>
+</body>
+</html>
