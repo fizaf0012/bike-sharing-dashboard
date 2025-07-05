@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bike Sharing Dashboard</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -22,6 +23,9 @@
   </header>
 
   <main>
+    <div class="kpi-grid" id="kpiCards">
+  <!-- Cards will be inserted here -->
+</div>
 
     <!-- LINE CHART -->
     <section id="line" class="chart-section chart-view active">
@@ -92,6 +96,7 @@
 
   <!-- Chart Scripts -->
   <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/kpi.js"></script>
   <script type="module" src="js/treeMap.js"></script>
   <script type="module" src="js/lineChart.js"></script>
   <script type="module" src="js/barChart.js"></script>
